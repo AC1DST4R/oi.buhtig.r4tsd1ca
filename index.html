@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AC1DST4R :3</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 100, 0.12), transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(100, 0, 255, 0.12), transparent 30%),
+                #090909;
+            color: white;
+            font-family:
+                "Comic Sans MS",
+                "Comic Sans",
+                cursive;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(900px, calc(100% - 30px));
+            margin: auto;
+        }
+
+        .top {
+            padding: 25px 0;
+            text-align: center;
+        }
+
+        .warning {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 2px dashed #ff3b81;
+            border-radius: 999px;
+            color: #ff72a7;
+            background: rgba(255, 0, 100, 0.08);
+            font-size: 13px;
+            transform: rotate(-2deg);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 0 80px;
+        }
+
+        .hero img {
+            width: 150px;
+            height: 150px;
+            border-radius: 40px;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow:
+                8px 8px 0 #ff3b81,
+                -8px -8px 0 #6c4cff;
+            transform: rotate(3deg);
+            transition: 0.3s;
+        }
+
+        .hero img:hover {
+            transform: rotate(-5deg) scale(1.08);
+        }
+
+        h1 {
+            margin: 35px 0 5px;
+            font-size: clamp(42px, 10vw, 80px);
+            text-shadow:
+                4px 4px 0 #ff3b81,
+                -3px -3px 0 #6c4cff;
+        }
+
+        .subtitle {
+            color: #aaa;
+            font-size: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .button {
+            padding: 12px 18px;
+            border-radius: 15px;
+            background: #181818;
+            border: 2px solid white;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: rotate(-3deg) scale(1.05);
+            background: #252525;
+        }
+
+        .button.pink {
+            background: #ff3b81;
+            border-color: #ff3b81;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin: 0;
+        }
+
+        .section-title p {
+            color: #888;
+        }
+
+        .card {
+            background: rgba(20,20,20,0.9);
+            border: 2px solid #292929;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 5px 5px 0 rgba(255,255,255,0.04);
+        }
+
+        .card-header {
+            width: 100%;
+            padding: 20px;
+            border: 0;
+            background: transparent;
+            color: white;
+            font: inherit;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .arrow {
+            transition: 0.3s;
+        }
+
+        .card.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .card-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease;
+        }
+
+        .card.open .card-content {
+            grid-template-rows: 1fr;
+        }
+
+        .card-inner {
+            overflow: hidden;
+        }
+
+        .card-list {
+            padding: 0 20px 20px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .item {
+            padding: 15px;
+            background: #151515;
+            border-radius: 13px;
+            border: 1px solid #292929;
+            transition: 0.2s;
+        }
+
+        .item:hover {
+            transform: translateX(5px) rotate(1deg);
+            border-color: #ff3b81;
+        }
+
+        .item-title {
+            font-weight: bold;
+        }
+
+        .item-desc {
+            color: #777;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        .silly-box {
+            padding: 30px;
+            border: 3px dotted #ff3b81;
+            border-radius: 25px;
+            background: rgba(255,59,129,0.04);
+            text-align: center;
+        }
+
+        .silly-box h3 {
+            font-size: 30px;
+            margin-top: 0;
+        }
+
+        .emotes {
+            font-size: 32px;
+            line-height: 2;
+            word-spacing: 15px;
+        }
+
+        .random {
+            margin-top: 20px;
+            min-height: 40px;
+            color: #ff72a7;
+            font-size: 18px;
+        }
+
+        .counter {
+            margin-top: 30px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            color: #555;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 45% {
+                opacity: 1;
+            }
+
+            50%, 100% {
+                opacity: 0.25;
+            }
+        }
+
+        .wiggle {
+            display: inline-block;
+            animation: wiggle 1.5s infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% {
+                transform: rotate(-2deg);
+            }
+
+            50% {
+                transform: rotate(2deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            .hero img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .emotes {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <div class="warning">
+            ⚠️ VERY UNPROFESSIONAL WEBSITE ⚠️
+        </div>
+    </div>
+
+
+    <section class="hero">
+
+        <img
+            src="https://github.com/AC1DST4R.png"
+            alt="me :3"
+        >
+
+        <h1>
+            AC1DST4R :3
+        </h1>
+
+        <div class="subtitle">
+            hi hello welcome to my silly corner of the internet :D
+        </div>
+
+        <div class="buttons">
+
+            <a class="button pink" href="https://ac1dst4r.github.io/">
+                ← serious me
+            </a>
+
+            <a class="button" href="https://github.com/AC1DST4R">
+                github thingy
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="silly-box">
+
+            <h3>
+                haiii :3
+            </h3>
+
+            <p>
+                you found the secret page
+            </p>
+
+            <p>
+                this is where professionalism goes to die
+            </p>
+
+            <div class="emotes">
+                :3 &nbsp; :D &nbsp; >:3 &nbsp; :3c &nbsp; ^w^
+                <br>
+                owo &nbsp; uwu &nbsp; >w< &nbsp; x3 &nbsp; :p
+            </div>
+
+            <div class="random" id="randomText">
+                loading silliness...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>
+                silly projects >:3
+            </h2>
+
+            <p>
+                things that definitely belong on a professional portfolio
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <button class="card-header">
+
+                <span>
+                    🎮 Apps
+                </span>
+
+                <span class="arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="card-content">
+
+                <div class="card-inner">
+
+                    <div class="card-list">
+
+                        <a
+                            class="item"
+                            href="https://ac1dst4r.github.io/Apps/"
+                        >
+                            <div class="item-title">
+                                my silly apps :3
+                            </div>
+
+                            <div class="item-desc">
+                                click here for the forbidden app zone
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <button class="card-header">
+
+                <span>
+                    💻 Repositories
+                </span>
+
+                <span class="arrow">
+                    ▼
+                </span>
+
+            </button>
+
+            <div class="card-content">
+
+                <div class="card-inner">
+
+                    <div class="card-list">
+
+                        <a
+                            class="item"
+                            href="https://github.com/AC1DST4R"
+                        >
+                            <div class="item-title">
+                                github :D
+                            </div>
+
+                            <div class="item-desc">
+                                behold. the code.
+                            </div>
+                        </a>
+
+                        <a
+                            class="item"
+                            href="https://github.com/AC1DST4R/Web-Ports"
+                        >
+                            <div class="item-title">
+                                Web-Ports
+                            </div>
+
+                            <div class="item-desc">
+                                web ports go brrrrrr
+                            </div>
+                        </a>
+
+                        <a
+                            class="item"
+                            href="https://github.com/AC1DST4R/Uptime-Keeper"
+                        >
+                            <div class="item-title">
+                                Uptime-Keeper
+                            </div>
+
+                            <div class="item-desc">
+                                beep boop server still alive
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section>
+
+        <div class="section-title">
+
+            <h2>
+                extremely important information
+            </h2>
+
+        </div>
+
+
+        <div class="silly-box">
+
+            <p>
+                I have absolutely no idea what I'm doing.
+            </p>
+
+            <p>
+                <span class="wiggle">I am lying.</span>
+            </p>
+
+            <p>
+                probably.
+            </p>
+
+            <p>
+                maybe.
+            </p>
+
+            <p class="blink">
+                👁️👁️
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <div class="counter">
+        You have been silly for <span id="seconds">0</span> seconds.
+    </div>
+
+
+    <footer>
+
+        made with questionable amounts of :3
+
+        <br><br>
+
+        <span class="blink">
+            no professionalism was harmed in the making of this website
+        </span>
+
+    </footer>
+
+</div>
+
+
+<script>
+    document.querySelectorAll(".card-header").forEach(button => {
+        button.addEventListener("click", () => {
+            button.closest(".card").classList.toggle("open");
+        });
+    });
+
+
+    const messages = [
+        "you are now legally required to say :3",
+        "meow",
+        "certified silly moment",
+        "why are you still here",
+        "hello :D",
+        "the website has become sentient",
+        "this was a terrible idea",
+        ">:3",
+        "someone gave me access to HTML",
+        "owo detected",
+        "deploying silliness...",
+        "error: professionalism not found",
+        "have a cookie 🍪",
+        "you found the silly zone",
+        "beep boop :3"
+    ];
+
+
+    const randomText = document.getElementById("randomText");
+
+
+    function sillyMessage() {
+        const message =
+            messages[Math.floor(Math.random() * messages.length)];
+
+        randomText.textContent = message;
+    }
+
+
+    sillyMessage();
+
+    setInterval(sillyMessage, 3500);
+
+
+    let seconds = 0;
+
+    setInterval(() => {
+        seconds++;
+
+        document.getElementById("seconds").textContent = seconds;
+    }, 1000);
+</script>
+
+</body>
+</html>
